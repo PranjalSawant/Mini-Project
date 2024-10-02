@@ -3,7 +3,7 @@
   --grey : #b6c4b6;
 }
 body{
-  background-color: #EEF0E5;
+  background-color: #EEF0E5 ;
   font-family: "Poppins", sans-serif !important;
 }
 /* colors */
@@ -18,6 +18,9 @@ body{
 }
 .text-olive{
   color: var(--olive);
+}
+.border-olive{
+  border: 3px solid var(--olive) !important;
 }
 .text-white{
   color: #EEF0E5 !important;

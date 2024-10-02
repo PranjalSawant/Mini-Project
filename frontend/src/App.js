@@ -6,6 +6,7 @@ import { Contactpage } from './pages/Contactpage';
 import Login from './pages/Loginpage';
 import Register from './pages/Registerpage';
 import { Layout } from './components/Layout';
+import { SellWaste } from './pages/SellWaste';
 
 function App() {
   return (
@@ -33,6 +34,14 @@ function App() {
           element={
             <Layout>
               <Contactpage />
+            </Layout>
+          }
+        />
+         <Route
+          path="/sellwaste"
+          element={
+            <Layout>
+              <SellWaste />
             </Layout>
           }
         />
