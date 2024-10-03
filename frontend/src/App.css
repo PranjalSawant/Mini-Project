@@ -19,11 +19,21 @@ body{
 .text-olive{
   color: var(--olive);
 }
+
 .border-olive{
   border: 3px solid var(--olive) !important;
 }
 .text-white{
   color: #EEF0E5 !important;
+}
+.btn-close.custom-close {
+  background-color: #EEF0E5; 
+  opacity: 1; 
+}
+
+.btn-close.custom-close:hover,
+.btn-close.custom-close:focus {
+  background-color: #EEF0E5; 
 }
 .btn-success {
   --bs-btn-color: #EEF0E5;
