@@ -1,8 +1,17 @@
 package com.example.demo.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.Date;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "pending_collection")
 public class PendingCollection {
@@ -14,22 +23,13 @@ public class PendingCollection {
     private String collectionType;
     private String collectionName;
     private String collectionDescription;
-    private boolean isAssigned;
-    private Date collectionDateTime;
+    private char isAssigned;
+    private Date collectionStartTime; // Start time for the collection
+    private Date collectionEndTime;
     private String collectionStatus;
     private String collectionState;
     private String collectionCity;
     private String collectionZip;
     private String collectionCountry;
 
-    // Getters and Setters
-    public int getCollectionId() {
-        return collectionId;
-    }
-
-    public void setCollectionId(int collectionId) {
-        this.collectionId = collectionId;
-    }
-
-    // Add other getters and setters...
 }

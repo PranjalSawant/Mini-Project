@@ -2,7 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.dto.AuthResponseDTO;
 import com.example.demo.entities.Agent;
-import com.example.demo.repository.AgentRepository;
+import com.example.demo.repositories.AgentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

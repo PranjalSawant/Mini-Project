@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "user_addresses")
 public class UserAddress {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate IDs
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int addressId;
     private String street;
     private String city;
