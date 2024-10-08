@@ -1,0 +1,101 @@
+:root{
+  --olive: #304D30;
+  --grey : #b6c4b6;
+}
+body{
+  background-color: #EEF0E5 ;
+  font-family: "Poppins", sans-serif !important;
+}
+/* colors */
+.bg-olive{
+  background-color: var(--olive);
+}
+.bg-grey{
+  background-color: var(--grey);
+}
+.nav-link{
+  color: #EEF0E5 !important;
+}
+.text-olive{
+  color: var(--olive);
+}
+
+.border-olive{
+  border: 3px solid var(--olive) !important;
+}
+.text-white{
+  color: #EEF0E5 !important;
+}
+.btn-close.custom-close {
+  background-color: #EEF0E5; 
+  opacity: 1; 
+}
+
+.btn-close.custom-close:hover,
+.btn-close.custom-close:focus {
+  background-color: #EEF0E5; 
+}
+.btn-success {
+  --bs-btn-color: #EEF0E5;
+  --bs-btn-bg: var(--olive) !important;
+  --bs-btn-border-color: var(--olive) !important;
+  --bs-btn-hover-color: #EEF0E5;
+  --bs-btn-hover-bg:  var(--olive) !important;
+  --bs-btn-hover-border-color:  var(--olive) !important;
+  --bs-btn-focus-shadow-rgb: 60, 153, 110;
+  --bs-btn-active-color: #EEF0E5;
+  --bs-btn-active-bg:  var(--olive) !important;
+  --bs-btn-active-border-color:  var(--olive) !important;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #EEF0E5;
+  --bs-btn-disabled-bg: var(--olive) !important;
+  --bs-btn-disabled-border-color: var(--olive) !important;
+  box-shadow: 0 10px 20px -8px #304d30cc;
+}
+.btn-white {
+  --bs-btn-color: var(--olive) !important;
+  --bs-btn-bg: #EEF0E5 !important;
+  --bs-btn-border-color: #EEF0E5 !important;
+  --bs-btn-hover-color: var(--olive) !important;
+  --bs-btn-hover-bg: #d3d4d5;
+  --bs-btn-hover-border-color: #c6c7c8;
+  --bs-btn-focus-shadow-rgb: 211, 212, 213;
+  --bs-btn-active-color: var(--olive) !important;
+  --bs-btn-active-bg: #c6c7c8;
+  --bs-btn-active-border-color: #babbbc;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: var(--olive) !important;
+  --bs-btn-disabled-bg: #EEF0E5 !important;
+  --bs-btn-disabled-border-color: #f8f9fa;
+}
+/* fonts */
+.dancing-script-brand {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.custom-form {
+  background-color: var(--grey);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.custom-btn {
+  background-color: var(--olive);
+  color: white;
+}
+
+.custom-btn:hover {
+  background-color: darkolivegreen;
+}
+
+.form-header {
+  color: var(--olive);
+}
+.switch-link {
+  color: var(--olive);
+}
+.card{
+  box-shadow: 0 10px 20px -8px #304d30cc;
+}
