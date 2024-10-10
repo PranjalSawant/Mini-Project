@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 function Register() {
   const [isAgent, setIsAgent] = useState(false); // Toggle between User and Agent registration
-  const [name, setName] = useState('');
+  const [fname, setfName] = useState('');
+  const [lname, setlName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [phone, setPhone] = useState('');
@@ -21,8 +22,8 @@ function Register() {
     const registrationData = isAgent
       ? {
           agentId: 0,
-          agentFirstName: name.split(' ')[0], // Agent First Name
-          agentLastName: name.split(' ')[1] || '', // Agent Last Name
+          agentFirstName: fname, // Agent First Name
+          agentLastName: lname, // Agent Last Name
           agentEmail: email,
           agentPassword: password,
           phone: parseInt(phone),
@@ -35,8 +36,8 @@ function Register() {
         }
       : {
           userId: 1,
-          firstname: name.split(' ')[0], // User First Name
-          lastname: name.split(' ')[1] || '', // User Last Name
+          firstname: fname, // User First Name
+          lastname: lname, // User Last Name
           email: email,
           password: password,
           phone: parseInt(phone),
@@ -76,101 +77,125 @@ function Register() {
 
   return (
     <div className="container">
-      <h2>{isAgent ? 'Agent' : 'User'} Register</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
+            <div className="py-lg-5 py-3"></div>
+            <div className="row justify-content-center ">
+        <div className="col-md-10">
+          <div className="custom-form p-lg-5">
+            <h2 className="form-header text-center">{isAgent ? 'Agent' : 'User'} Register</h2>
+      <form onSubmit={handleSubmit} className='row'>
+        <div className="col-md-6 mb-3">
+          <label>First Name:</label>
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            className="form-control"
+            value={fname}
+            onChange={(e) => setfName(e.target.value)}
             required
           />
         </div>
-        <div>
+        <div className="col-md-6 mb-3">
+          <label>Last Name:</label>
+          <input
+            type="text"
+            className="form-control"
+            value={lname}
+            onChange={(e) => setlName(e.target.value)}
+            required
+          />
+        </div>
+        <div className=" col-md-6 mb-3">
           <label>Email:</label>
           <input
             type="email"
+            className="form-control"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
-        <div>
+        <div className=" col-md-6 mb-3">
           <label>Password:</label>
           <input
             type="password"
+            className="form-control"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
-        <div>
+        <div className=" col-md-6 mb-3">
           <label>Phone:</label>
           <input
             type="text"
+            className="form-control"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             required
           />
         </div>
-        <div>
+        <div className=" col-md-6 mb-3">
           <label>Street:</label>
           <input
             type="text"
+            className="form-control"
             value={street}
             onChange={(e) => setStreet(e.target.value)}
             required
           />
         </div>
-        <div>
+        <div className=" col-md-6 mb-3"> 
           <label>City:</label>
           <input
             type="text"
+            className="form-control"
             value={city}
             onChange={(e) => setCity(e.target.value)}
             required
           />
         </div>
-        <div>
+        <div className=" col-md-6 mb-3">
           <label>State:</label>
           <input
             type="text"
+            className="form-control"
             value={state}
             onChange={(e) => setState(e.target.value)}
             required
           />
         </div>
-        <div>
+        <div className=" col-md-6 mb-3">
           <label>Zip Code:</label>
           <input
             type="text"
+            className="form-control"
             value={zipCode}
             onChange={(e) => setZipCode(e.target.value)}
             required
           />
         </div>
-        <div>
+        <div className=" col-md-6 mb-3">
           <label>Country:</label>
           <input
             type="text"
+            className="form-control"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             required
           />
         </div>
         {isAgent && (
-          <div>
+          <div className=" col-md-6 mb-3">
             <label>Agent Type:</label>
             <input
               type="text"
+              className="form-control"
               value={agentType}
               onChange={(e) => setAgentType(e.target.value)}
               required
             />
           </div>
         )}
-        <button type="submit">Register</button>
+        <button  type="submit" className="btn btn-success my-3 w-100">Register</button>
       </form>
       
       <div className="mt-3 text-center">
@@ -183,6 +208,9 @@ function Register() {
         <p>
           Already have an account? <Link className="switch-link" to="/login">Login here</Link>
         </p>
+      </div>
+      </div>
+      </div>
       </div>
     </div>
   );

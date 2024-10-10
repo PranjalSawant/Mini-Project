@@ -68,6 +68,11 @@ body{
   --bs-btn-disabled-bg: #EEF0E5 !important;
   --bs-btn-disabled-border-color: #f8f9fa;
 }
+.table {
+  --bs-table-color: none !important;
+  --bs-table-bg: none !important;
+
+}
 /* fonts */
 .dancing-script-brand {
   font-family: "Dancing Script", cursive;
@@ -98,4 +103,12 @@ body{
 }
 .card{
   box-shadow: 0 10px 20px -8px #304d30cc;
+}
+.pincode-dropdwown{
+  background-color: var(--olive) !important;
+  color: white !important;
+  border-radius: 50rem !important;
+}
+.pincode-dropdwown>option:hover{
+  background-color: var(--grey) !important;
 }

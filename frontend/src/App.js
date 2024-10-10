@@ -9,6 +9,7 @@ import { Layout } from './components/Layout';
 import { SellWaste } from './pages/SellWaste';
 import AdminPanel from './pages/AdminPanel';
 import { AgentsPanel } from './pages/AgentsPanel';
+import { AgentsTrack } from './pages/AgentsTrack';
 
 function App() {
   return (
@@ -53,6 +54,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path='/admin' element={<AdminPanel/>}/>
         <Route path='/agent' element={<AgentsPanel/>}/>
+        <Route path='/agent/track' element={<AgentsTrack/>}/>
+
 
       </Routes>
     </Router>
