@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [userName, setUserName] = useState(null);
   useEffect(() => {
     const cookies = document.cookie.split("; ").reduce((acc, cookie) => {
@@ -67,7 +67,7 @@ export const Header = () => {
           <ul className="navbar-nav mb-2 mb-lg-0">
             {userName ? (
               <>
-                <div class="dropdown">
+                <div className="dropdown">
                   <span
                     className="nav-link dropdown-toggle"
                     href="#"
@@ -78,14 +78,14 @@ export const Header = () => {
                     Welcome, {userName}!
                   </span>
 
-                  <ul class="dropdown-menu">
+                  <ul className="dropdown-menu">
                     <li className="nav-item">
-                      <Link className="dropdown-item" to="/">
+                      <Link className="dropdown-item" to="/offers">
                         Offers
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="dropdown-item" to="/">
+                      <Link className="dropdown-item" to="/trackorder">
                         Track Order
                       </Link>
                     </li>

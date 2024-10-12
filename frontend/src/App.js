@@ -10,6 +10,8 @@ import { SellWaste } from "./pages/SellWaste";
 import AdminPanel from "./pages/AdminPanel";
 import { AgentsPanel } from "./pages/AgentsPanel";
 import { AgentsTrack } from "./pages/AgentsTrack";
+import { UserTrackOrder } from "./pages/UserTrackOrder";
+import { Offers } from "./pages/Offers";
 
 function App() {
   return (
@@ -50,6 +52,10 @@ function App() {
         />
       <Route path="/agent" element={ <Layout><AgentsPanel /></Layout>} />
       <Route path="/agent/track" element={ <Layout><AgentsTrack /></Layout>} />
+      <Route path="/trackorder" element={ <Layout><UserTrackOrder /></Layout>} />
+      <Route path="/offers" element={ <Layout><Offers/></Layout>} />
+
+
         {/* Routes without Header */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

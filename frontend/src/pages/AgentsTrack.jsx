@@ -17,6 +17,7 @@ export const AgentsTrack = () => {
           collectionCity: 'Mumbai',
           collectionZip: '400001',
           collectionCountry: 'India',
+          completed:'Done'
         },
         {
           collectionId: 2,
@@ -32,9 +33,12 @@ export const AgentsTrack = () => {
           collectionCity: 'Bangalore',
           collectionZip: '560001',
           collectionCountry: 'India',
+          completed: 'Done'
         }
       ];
-    
+      const OrderComplete = ()=> {
+
+      }
       return (
         <div className="container-fluid mt-4">
           <Titles heading="Collection Data" textColor="text-olive"/>
@@ -55,6 +59,7 @@ export const AgentsTrack = () => {
                 <th>City</th>
                 <th>ZIP</th>
                 <th>Country</th>
+                <th>Completed</th>
               </tr>
             </thead>
             <tbody>
@@ -73,6 +78,8 @@ export const AgentsTrack = () => {
                   <td>{item.collectionCity}</td>
                   <td>{item.collectionZip}</td>
                   <td>{item.collectionCountry}</td>
+                  <td><button className='btn btn-success' onClick={OrderComplete()}>{item.completed}</button></td>
+
                 </tr>
               ))}
             </tbody>

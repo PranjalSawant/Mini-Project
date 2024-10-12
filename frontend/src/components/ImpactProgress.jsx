@@ -27,7 +27,7 @@ export const ImpactProgress = () => {
                     strokeLinecap: 'round', // Rounded end caps on the progress bar
                     textSize: '16px',
                     pathTransitionDuration: 0.5, // Smooth animation for path
-                    pathColor: `rgba(225, 225, 225, ${percentage / 100})`, // Path color based on percentage
+                    pathColor: `rgba(182, 196, 182, 1), ${percentage / 100})`, // Path color based on percentage
                     textColor: '#fff',
                     background: true,
                     trailColor: '#fff',

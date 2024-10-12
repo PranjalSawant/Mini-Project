@@ -63,11 +63,15 @@ body{
   --bs-dropdown-border-color: var(--olive) !important;
   color: var(--olive) !important;
   border-radius: 10px !important;
+  --bs-dropdown-link-active-bg:var(--olive) !important;
 }
 .table {
   --bs-table-color: none !important;
   --bs-table-bg: none !important;
 
+}
+.table-striped>tbody>tr:nth-of-type(odd)>* {
+  --bs-table-bg-type: #eef0e542 !important;
 }
 /* fonts */
 .dancing-script-brand {
