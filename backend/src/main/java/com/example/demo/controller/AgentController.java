@@ -52,6 +52,7 @@ public class AgentController {
         }
     }
 
+    // not used
     // All available pickups at a particular pin code where isAssigned == 'N'
     @GetMapping("/pickups/{pincode}")
     public ResponseEntity<List<PendingCollection>> viewPickupsByZipCode(@PathVariable String pincode) {

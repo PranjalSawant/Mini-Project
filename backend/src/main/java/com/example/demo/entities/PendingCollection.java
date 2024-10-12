@@ -19,7 +19,11 @@ public class PendingCollection {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int collectionId;
 
-    private int userId;
+    @ManyToOne
+    @JoinColumn(name = "userId", referencedColumnName = "userId", insertable = false, updatable = false)
+    private User user; // Add a reference to the User entity
+
+    private int userId; // This will stay for the foreign key reference
     private String collectionType;
     private String collectionName;
     private String collectionDescription;
@@ -31,5 +35,4 @@ public class PendingCollection {
     private String collectionCity;
     private String collectionZip;
     private String collectionCountry;
-
 }

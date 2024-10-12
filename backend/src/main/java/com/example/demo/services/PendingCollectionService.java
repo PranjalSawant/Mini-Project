@@ -27,10 +27,15 @@ public class PendingCollectionService {
     }
 
     // Fetch pickups by pincode and where isAssigned is 'N'
-    public List<PendingCollection> getPickupsByZipCodeAndIsAssigned(String zipCode, char isAssigned) {
-        return pendingCollectionRepository.findByCollectionZipAndIsAssigned(zipCode, isAssigned);
+//    public List<PendingCollection> getPickupsByZipCodeAndIsAssigned(String zipCode, char isAssigned) {
+//        return pendingCollectionRepository.findByCollectionZipAndIsAssigned(zipCode, isAssigned);
+//    }
+    public List<PendingCollection> getPickupsByZipCodeAndIsAssigned(String pincode, char isAssigned) {
+        return pendingCollectionRepository.findByZipCodeAndIsAssigned(pincode, isAssigned);
     }
+
     public void deleteById(int collectionId) {
         pendingCollectionRepository.deleteById(collectionId);
     }
+
 }

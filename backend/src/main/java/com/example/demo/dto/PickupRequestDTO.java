@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class PickupRequestDTO {
     private int userId;
+    private int userAddressId;
     private String collectionType;
     private String collectionName;
     private String collectionDescription;

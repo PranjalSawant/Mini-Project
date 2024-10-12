@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/user", produces = "application/json")
@@ -97,6 +98,19 @@ public class UserController {
             return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+
+    // All available pickups at a particular pin code where isAssigned == 'N'
+    @GetMapping("/pickups/{pincode}")
+    public ResponseEntity<List<PendingCollection>> viewPickupsByZipCode(@PathVariable String pincode) {
+        List<PendingCollection> pickups = pendingCollectionService.getPickupsByZipCodeAndIsAssigned(pincode, 'N');
+
+        if (pickups.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(pickups);
         }
     }
 }
