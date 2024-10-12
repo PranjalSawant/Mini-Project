@@ -12,7 +12,7 @@ export const AgentsPanel = () => {
 
     try {
       const { data } = await axios.get(
-        `http://localhost:9090/api/agents/pickups/${pincode}`
+        `http://localhost:9090/api/user/pickups/${pincode}`
       );
 
       console.log("Data received", data);
@@ -88,7 +88,8 @@ export const AgentsPanel = () => {
                 <div className="card mb-3 border-0 rounded-5">
                   <div className="card-body bg-grey rounded-5 p-4">
                     <h5 className="card-title fw-bold py-3">
-                      {card.collectionName} - {card.userId}
+                      {card.collectionName} - {card.userId}{" "}
+                      {card.user.firstname}
                     </h5>
                     <p className="card-text">{card.collectionDescription}</p>
                     <p className="card-text">

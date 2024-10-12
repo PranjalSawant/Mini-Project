@@ -23,3 +23,19 @@ export const getCookie = (name) => {
   }
   return null;
 };
+
+// Function to store an object in localStorage
+export const storeObjectInLocalStorage = (key, object) => {
+  localStorage.setItem(key, JSON.stringify(object));
+};
+
+// Function to retrieve an object from localStorage
+export const getObjectFromLocalStorage = (key) => {
+  const item = localStorage.getItem(key);
+  return item ? JSON.parse(item) : null;
+};
+
+// Function to remove an object from localStorage
+export const removeObjectFromLocalStorage = (key) => {
+  localStorage.removeItem(key);
+};
