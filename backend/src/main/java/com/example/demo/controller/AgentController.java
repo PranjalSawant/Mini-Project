@@ -18,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/agents")
+@CrossOrigin(origins = "*")
 public class AgentController {
 
     @Autowired

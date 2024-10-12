@@ -17,18 +17,20 @@ public class UserService {
     public AuthResponseDTO signup(User user) {
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
         if (existingUser.isPresent()) {
-            return new AuthResponseDTO("error", "Already Exist");
+            return new AuthResponseDTO("error", "Already Exist", 0, null);
         }
         userRepository.save(user);
-        return new AuthResponseDTO("success", "success");
+        return new AuthResponseDTO("success", "Signup successful", 0, null);
     }
 
     // Login service
     public AuthResponseDTO login(String email, String password) {
         Optional<User> user = userRepository.findByEmailAndPassword(email, password);
         if (user.isPresent()) {
-            return new AuthResponseDTO("success", "success");
+            User loggedInUser = user.get();
+            return new AuthResponseDTO("success", "Login successful", loggedInUser.getUserId(), loggedInUser.getFirstname());
         }
-        return new AuthResponseDTO("error", "failed");
+        return new AuthResponseDTO("error", "Login failed", 0, null);
     }
+
 }

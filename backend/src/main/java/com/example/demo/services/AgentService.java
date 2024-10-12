@@ -18,18 +18,19 @@ public class AgentService {
     public AuthResponseDTO signup(Agent agent) {
         Optional<Agent> existingAgent = agentRepository.findByAgentEmail(agent.getAgentEmail());
         if (existingAgent.isPresent()) {
-            return new AuthResponseDTO("error", "Already Exist");
+            return new AuthResponseDTO("error", "Already Exist",0,null);
         }
         agentRepository.save(agent);
-        return new AuthResponseDTO("success", "success");
+        return new AuthResponseDTO("success", "success",0,null);
     }
 
     // Login service
     public AuthResponseDTO login(String email, String password) {
         Optional<Agent> agent = agentRepository.findByAgentEmailAndAgentPassword(email, password);
         if (agent.isPresent()) {
-            return new AuthResponseDTO("success", "success");
+            Agent loginAgent = agent.get();
+            return new AuthResponseDTO("success", "success",loginAgent.getAgentId(),loginAgent.getAgentFirstName());
         }
-        return new AuthResponseDTO("error", "failed");
+        return new AuthResponseDTO("error", "failed",0,null);
     }
 }
