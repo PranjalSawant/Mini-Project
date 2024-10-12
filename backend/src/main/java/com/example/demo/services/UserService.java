@@ -17,10 +17,10 @@ public class UserService {
     public AuthResponseDTO signup(User user) {
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
         if (existingUser.isPresent()) {
-            return new AuthResponseDTO("error", "Already Exist", 0, null);
+            return new AuthResponseDTO("error", "Already Exist", 0, null, null);
         }
         userRepository.save(user);
-        return new AuthResponseDTO("success", "Signup successful", 0, null);
+        return new AuthResponseDTO("success", "Signup successful", 0, null,null);
     }
 
     // Login service
@@ -28,9 +28,9 @@ public class UserService {
         Optional<User> user = userRepository.findByEmailAndPassword(email, password);
         if (user.isPresent()) {
             User loggedInUser = user.get();
-            return new AuthResponseDTO("success", "Login successful", loggedInUser.getUserId(), loggedInUser.getFirstname());
+            return new AuthResponseDTO("success", "Login successful", loggedInUser.getUserId(), loggedInUser.getFirstname() , loggedInUser);
         }
-        return new AuthResponseDTO("error", "Login failed", 0, null);
+        return new AuthResponseDTO("error", "Login failed", 0, null, null);
     }
 
 }

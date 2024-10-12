@@ -7,11 +7,15 @@ import clothes from "../assets/clothes.png";
 import { Button } from "../components/Button";
 import { ImpactProgress } from "../components/ImpactProgress";
 import axios from "axios";
-import { storeObjectInLocalStorage } from "../utils/cookie";
+import {
+  getObjectFromLocalStorage,
+  storeObjectInLocalStorage,
+} from "../utils/cookie";
 
 export const SellWaste = () => {
   const [showModal, setShowModal] = useState(false);
 
+  const userData = getObjectFromLocalStorage("userdata");
   // this data is to coming from localstorage
   const [pickupData, setPickupData] = useState({
     userId: 1,

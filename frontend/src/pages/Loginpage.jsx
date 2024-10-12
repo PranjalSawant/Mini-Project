@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { setCookie } from "../utils/cookie";
+import { setCookie, storeObjectInLocalStorage } from "../utils/cookie";
 import axios from "axios";
 
 function Login() {
@@ -30,6 +30,8 @@ function Login() {
       setCookie("id", id, 1);
       setCookie("username", username, 1);
       setCookie("isAgent", isAgent ? "agent" : "user", 1);
+      // store userdata in localstorage
+      storeObjectInLocalStorage("userdata", data);
 
       // redirect based on user type
       isAgent ? navigate("/agent") : navigate("/");

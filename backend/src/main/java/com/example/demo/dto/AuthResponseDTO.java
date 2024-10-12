@@ -1,5 +1,6 @@
 package com.example.demo.dto;
 
+import com.example.demo.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,4 +15,5 @@ public class AuthResponseDTO {
     private String message;
     private int id;
     private String username;
+    private User user;
 }
