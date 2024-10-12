@@ -48,13 +48,13 @@ function App() {
             </Layout>
           }
         />
-
+      <Route path="/agent" element={ <Layout><AgentsPanel /></Layout>} />
+      <Route path="/agent/track" element={ <Layout><AgentsTrack /></Layout>} />
         {/* Routes without Header */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={<AdminPanel />} />
-        <Route path="/agent" element={<AgentsPanel />} />
-        <Route path="/agent/track" element={<AgentsTrack />} />
+        
       </Routes>
     </Router>
   );
