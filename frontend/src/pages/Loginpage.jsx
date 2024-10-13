@@ -7,15 +7,45 @@ function Login() {
   const [isAgent, setIsAgent] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState(""); 
+  const [passwordError, setPasswordError] = useState(""); 
+  const [alertMessage, setAlertMessage] = useState(null); 
+  const [alertType, setAlertType] = useState(""); 
 
   const navigate = useNavigate();
+
+  const validateForm = () => {
+    let isValid = true;
+
+    // Validate email
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setEmailError("Please enter a valid email address.");
+      isValid = false;
+    } else {
+      setEmailError("");
+    }
+
+    // Validate password (minimum 6 characters)
+    if (!password || password.length < 2) {
+      setPasswordError("Password must be at least 2 characters long.");
+      isValid = false;
+    } else {
+      setPasswordError("");
+    }
+
+    return isValid;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!validateForm()) {
+      return;
+    }
+
     try {
       const apiEndpoint = isAgent
-        ? "http://localhost:9090/api/agents/login" // Agent signup endpoint
+        ? "http://localhost:9090/api/agents/login"
         : "http://localhost:9090/api/user/login";
       const { data } = await axios.post(apiEndpoint, {
         email,
@@ -23,23 +53,27 @@ function Login() {
         userType: isAgent ? "Agent" : "User",
       });
 
-      console.log("Login successful", data);
+      // Show success alert
+      setAlertMessage("Login successful!");
+      setAlertType("success");
+
       const { id, username } = data;
 
-      // set cookie for later
+      // Set cookie and localStorage
       setCookie("id", id, 1);
       setCookie("username", username, 1);
       setCookie("isAgent", isAgent ? "agent" : "user", 1);
-      // store userdata in localstorage
       storeObjectInLocalStorage("userdata", data);
 
-      // redirect based on user type
-      isAgent ? navigate("/agent") : navigate("/");
+      // Redirect after a short delay to show success message
+      setTimeout(() => {
+        isAgent ? navigate("/agent") : navigate("/");
+      }, 2000);
     } catch (error) {
-      console.error(
-        "Login failed",
-        error.response?.data?.message || error.message
+      setAlertMessage(
+        `Login failed: ${error.response?.data?.message || error.message}`
       );
+      setAlertType("danger");
     }
   };
 
@@ -53,6 +87,15 @@ function Login() {
             <h2 className="form-header text-center">
               {isAgent ? "Agent" : "User"} Login
             </h2>
+
+            {/*  alert */}
+            {alertMessage && (
+              <div className={`alert alert-${alertType} alert-dismissible fade show`} role="alert">
+                {alertMessage}
+                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
@@ -60,28 +103,36 @@ function Login() {
                 </label>
                 <input
                   type="email"
-                  className="form-control"
+                  className={`form-control ${emailError ? "is-invalid" : ""}`}
                   id="email"
                   placeholder="Enter email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
+                {emailError && (
+                  <div className="invalid-feedback">{emailError}</div>
+                )}
               </div>
+
               <div className="mb-3">
                 <label htmlFor="password" className="form-label">
                   Password
                 </label>
                 <input
                   type="password"
-                  className="form-control"
+                  className={`form-control ${passwordError ? "is-invalid" : ""}`}
                   id="password"
                   placeholder="Enter password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
+                {passwordError && (
+                  <div className="invalid-feedback">{passwordError}</div>
+                )}
               </div>
+
               <button type="submit" className="btn btn-success my-3 w-100">
                 Login
               </button>
@@ -92,10 +143,7 @@ function Login() {
                 Are you an {isAgent ? "User" : "Agent"}?{" "}
                 <Link
                   className="switch-link"
-                  onClick={() => {
-                    setIsAgent(!isAgent);
-                    console.log("isAgent toggled:", !isAgent);
-                  }}
+                  onClick={() => setIsAgent(!isAgent)}
                 >
                   Switch to {isAgent ? "User" : "Agent"} Login
                 </Link>

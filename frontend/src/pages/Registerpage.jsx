@@ -14,7 +14,8 @@ function Register() {
   const [zipCode, setZipCode] = useState("");
   const [country, setCountry] = useState("");
   const [agentType, setAgentType] = useState("");
-
+  const [alertMessage, setAlertMessage] = useState(null);
+  const [alertType, setAlertType] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -84,29 +85,47 @@ function Register() {
           `${isAgent ? "Agent" : "User"} registration successful`,
           result
         );
+        setAlertMessage(`${isAgent ? "Agent" : "User"} registration successful!`);
+        setAlertType("info");
       } else {
         console.error(
           `${isAgent ? "Agent" : "User"} registration failed`,
           result.message
         );
+        setAlertMessage(`${isAgent ? "Agent" : "User"} registration failed: ${result.message}`);
+        setAlertType("danger");
       }
     } catch (error) {
       console.error(
         `Error during ${isAgent ? "agent" : "user"} registration:`,
         error
       );
+      setAlertMessage(`Error during ${isAgent ? "agent" : "user"} registration: ${error.message}`);
+      setAlertType("danger"); 
     }
   };
 
   return (
     <div className="container">
-      <div className="py-lg-5 py-3"></div>
+        <div className="py-lg-5  py-3"></div>
+      {/* alert */}
+      <div className="row justify-content-center ">
+        <div className="col-md-10">
+      {alertMessage && (
+              <div className={`alert alert-${alertType} alert-dismissible fade show`} role="alert">
+                {alertMessage}
+                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+      )}
+      </div>
+      </div>
       <div className="row justify-content-center ">
         <div className="col-md-10">
           <div className="custom-form p-lg-5">
             <h2 className="form-header text-center">
               {isAgent ? "Agent" : "User"} Register
             </h2>
+            
             <form onSubmit={handleSubmit} className="row">
               <div className="col-md-6 mb-3">
                 <label>First Name:</label>

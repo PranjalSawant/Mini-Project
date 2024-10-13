@@ -15,7 +15,8 @@ import {
 
 export const SellWaste = () => {
   const [showModal, setShowModal] = useState(false);
-
+  const [alertMessage, setAlertMessage] = useState(null); 
+  const [alertType, setAlertType] = useState(""); 
   // Helper function to get today's date in YYYY-MM-DD format
   const getTodayDate = () => {
     const today = new Date();
@@ -131,11 +132,17 @@ export const SellWaste = () => {
         payload
       );
       console.log("Pickup scheduled successfully", response.data);
+      setAlertMessage("Pickup scheduled successfully!");
+      setAlertType("success");
       setShowModal(false); // Close modal on success
       removeObjectFromLocalStorage("pickupData"); // Clear stored data if desired
+      
     } catch (error) {
       console.error("Error scheduling pickup", error);
-      // Optionally, add user-facing error handling here
+      setAlertMessage(
+        `Pick up schedule failed`
+      );
+      setAlertType("danger");
     }
   };
 
@@ -143,6 +150,13 @@ export const SellWaste = () => {
     <div className="">
       <div className="py-5 bg-olive">
         <div className="container">
+            {/*  alert */}
+            {alertMessage && (
+                    <div className={`alert alert-${alertType} alert-dismissible fade show`} role="alert">
+                      {alertMessage}
+                      <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                  )}
           <Titles
             heading="Your Recycling Impact in Action"
             textColor="text-white"
@@ -269,9 +283,11 @@ export const SellWaste = () => {
                   ></button>
                 </div>
                 <div className="modal-body">
+                
                   <form onSubmit={handleSubmit}>
                     {/* Pickup Address Fields */}
                     <h6>Pickup Address</h6>
+
                     <div className="row p-3">
                       <div className="col-lg-6">
                         <div className="mb-3">
@@ -391,10 +407,12 @@ export const SellWaste = () => {
                     </div>
 
                     {/* Pickup Date and Time */}
-                    <div className="mb-3">
+                    <h6>Pickup Time</h6>
+                    <div className="row p-3">
+                      <div className="col-md-6 mb-3">
                       <label
                         htmlFor="pickupDate"
-                        className="form-label fw-semibold"
+                        className="form-label "
                       >
                         Pickup Date
                       </label>
@@ -411,8 +429,8 @@ export const SellWaste = () => {
                           })
                         }
                       />
-                    </div>
-                    <div className="mb-3">
+                      </div>
+                      <div className="col-md-6 mb-3">
                       <label htmlFor="pickupStartTime" className="form-label">
                         Pickup Start Time
                       </label>
@@ -429,8 +447,8 @@ export const SellWaste = () => {
                           })
                         }
                       />
-                    </div>
-                    <div className="mb-3">
+                      </div>
+                      <div className="col-md-6 mb-3">
                       <label htmlFor="pickupEndTime" className="form-label">
                         Pickup End Time
                       </label>
@@ -447,9 +465,8 @@ export const SellWaste = () => {
                           })
                         }
                       />
-                    </div>
-                    {/* Contact Number and Special Instructions */}
-                    <div className="mb-3">
+                      </div>
+                      <div className="col-md-6 mb-3">
                       <label htmlFor="contactNumber" className="form-label">
                         Contact Number
                       </label>
@@ -466,14 +483,11 @@ export const SellWaste = () => {
                           })
                         }
                       />
+                      </div>
                     </div>
-                    <div className="mb-3">
-                      <label
-                        htmlFor="specialInstructions"
-                        className="form-label"
-                      >
-                        Special Instructions
-                      </label>
+                    <div className="mt-3">
+                      <h6> Special Instructions</h6>
+                      <div className="p-3">
                       <textarea
                         className="form-control"
                         id="specialInstructions"
@@ -486,6 +500,7 @@ export const SellWaste = () => {
                           })
                         }
                       />
+                      </div>
                     </div>
                     <Button
                       btnText="Schedule Pickup"

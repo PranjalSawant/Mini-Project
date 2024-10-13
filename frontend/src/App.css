@@ -65,6 +65,10 @@ body{
   border-radius: 10px !important;
   --bs-dropdown-link-active-bg:var(--olive) !important;
 }
+.alert-success {
+  --bs-alert-color: var(--olive) !important;
+  --bs-alert-bg: #EEF0E5 !important;
+}
 .table {
   --bs-table-color: none !important;
   --bs-table-bg: none !important;

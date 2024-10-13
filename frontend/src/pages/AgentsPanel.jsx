@@ -3,16 +3,34 @@ import { Titles } from "../components/Titles";
 import { Button } from "../components/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
+
 export const AgentsPanel = () => {
   const [selectedPincode, setSelectedPincode] = useState("");
   const [cardsData, setCardsData] = useState([]);
-  const handlePincodeChange = async (e) => {
-    const pincode = e.target.value; // Capture the pincode directly from the event
-    setSelectedPincode(pincode);
+  const [error, setError] = useState(""); // Error state for invalid pincode
+
+  const handlePincodeChange = (e) => {
+    const pincode = e.target.value;
+    // Ensure only digits are allowed and pincode is a 6-digit number
+    if (/^\d{0,6}$/.test(pincode)) {
+      setSelectedPincode(pincode);
+      setError(""); // Clear error if pincode is valid
+    } else {
+      setError("Pincode must be a 6-digit number");
+    }
+  };
+
+  const handlePincodeSubmit = async (e) => {
+    e.preventDefault();
+
+    if (selectedPincode.length !== 6) {
+      setError("Please enter a valid 6-digit pincode");
+      return;
+    }
 
     try {
       const { data } = await axios.get(
-        `http://localhost:9090/api/user/pickups/${pincode}`
+        `http://localhost:9090/api/user/pickups/${selectedPincode}`
       );
 
       console.log("Data received", data);
@@ -25,89 +43,52 @@ export const AgentsPanel = () => {
     }
   };
 
-  //   const cardsData = [
-  //     {
-  //       pincode: "110001",
-  //       title: "Delhi",
-  //       description:
-  //         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est amet impedit odit fuga numquam minus a beatae adipisci corrupti tempora quis unde optio natus libero earum, repellat dolores cupiditate nesciunt.",
-  //     },
-  //     {
-  //       pincode: "400001",
-  //       title: "Mumbai",
-  //       description:
-  //         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est amet impedit odit fuga numquam minus a beatae adipisci corrupti tempora quis unde optio natus libero earum, repellat dolores cupiditate nesciunt.",
-  //     },
-  //     {
-  //       pincode: "560001",
-  //       title: "Bangalore",
-  //       description:
-  //         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est amet impedit odit fuga numquam minus a beatae adipisci corrupti tempora quis unde optio natus libero earum, repellat dolores cupiditate nesciunt.",
-  //     },
-  //   ];
-
   return (
     <div className="container">
-      <Titles
-        heading="Select Pincode to Display Cards"
-        textColor="text-olive"
-      />
-      <select
-        className="form-control bg-olive pincode-dropdwown p-3 fw-semibold"
-        onChange={handlePincodeChange}
-      >
-        <option value="">Select Pincode</option>
-        <option value="400604">400604</option>
-        <option value="400001">400001</option>
-        <option value="400112">400112</option>
-      </select>
-      {/* <div className="row mt-3">
-        {cardsData.map(
-          (card) =>
-            (card.pincode === card.collectionZip || selectedPincode === "") && (
-              <div className="col-md-4" key={card.pincode}>
-                <div className="card mb-3 border-0 rounded-5">
-                  <div className="card-body bg-grey rounded-5 p-4">
-                    <h5 className="card-title fw-bold py-3">{card.title}</h5>
-                    <p className="card-text">{card.description}</p>
-                    <Link>
-                      <Button btnText="Confirm Pickup" bgColor="btn-success" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            )
-        )}
-      </div> */}
+      <Titles heading="Enter Pincode to Display Cards" textColor="text-olive" />
+      <form onSubmit={handlePincodeSubmit}>
+        <input
+          type="text"
+          className="form-control bg-olive pincode-input p-3 fw-semibold"
+          placeholder="Enter 6-digit pincode"
+          value={selectedPincode}
+          onChange={handlePincodeChange}
+        />
+        {error && <p className="text-danger">{error}</p>} {/* Error message */}
+        <Button btnText="Search" bgColor="btn-success mt-3" />
+      </form>
+
       <div className="row mt-3">
-        {cardsData.map(
-          (card) =>
-            (card.collectionZip === selectedPincode ||
-              selectedPincode === "") && (
-              <div className="col-md-4" key={card.collectionId}>
-                <div className="card mb-3 border-0 rounded-5">
-                  <div className="card-body bg-grey rounded-5 p-4">
-                    <h5 className="card-title fw-bold py-3">
-                      {card.collectionName} - {card.userId}{" "}
-                      {card.user.firstname}
-                    </h5>
-                    <p className="card-text">{card.collectionDescription}</p>
-                    <p className="card-text">
-                      <strong>City:</strong> {card.collectionCity},{" "}
-                      {card.collectionState}
-                    </p>
-                    <p className="card-text">
-                      <strong>Status:</strong> {card.collectionStatus}
-                    </p>
-                    <Link>
-                      <Button btnText="Confirm Pickup" bgColor="btn-success" />
-                    </Link>
-                  </div>
+        {cardsData.length === 0 && !error && (
+          <p className="text-center">No pickups found for this pincode.</p>
+        )}
+        {cardsData.map((card) => (
+          (card.collectionZip === selectedPincode) && (
+            <div className="col-md-4" key={card.collectionId}>
+              <div className="card mb-3 border-0 rounded-5">
+                <div className="card-body bg-grey rounded-5 p-4">
+                  <h5 className="card-title fw-bold py-3">
+                    {card.collectionName} - {card.userId}{" "}
+                    {card.user.firstname}
+                  </h5>
+                  <p className="card-text">{card.collectionDescription}</p>
+                  <p className="card-text">
+                    <strong>City:</strong> {card.collectionCity},{" "}
+                    {card.collectionState}
+                  </p>
+                  <p className="card-text">
+                    <strong>Status:</strong> {card.collectionStatus}
+                  </p>
+                  <Link>
+                    <Button btnText="Confirm Pickup" bgColor="btn-success" />
+                  </Link>
                 </div>
               </div>
-            )
-        )}
+            </div>
+          )
+        ))}
       </div>
+      <div className="py-5"></div>
     </div>
   );
 };
