@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.dto.AgentAuthResponseDTO;
 import com.example.demo.dto.AuthResponseDTO;
 import com.example.demo.entities.Agent;
 import com.example.demo.repositories.AgentRepository;
@@ -25,12 +26,12 @@ public class AgentService {
     }
 
     // Login service
-    public AuthResponseDTO login(String email, String password) {
+    public AgentAuthResponseDTO login(String email, String password) {
         Optional<Agent> agent = agentRepository.findByAgentEmailAndAgentPassword(email, password);
         if (agent.isPresent()) {
             Agent loginAgent = agent.get();
-            return new AuthResponseDTO("success", "success",loginAgent.getAgentId(),loginAgent.getAgentFirstName(),null);
+            return new AgentAuthResponseDTO("success", "success",loginAgent.getAgentId(),loginAgent.getAgentFirstName(),loginAgent);
         }
-        return new AuthResponseDTO("error", "failed",0,null,null);
+        return new AgentAuthResponseDTO("error", "failed",0,null,null);
     }
 }

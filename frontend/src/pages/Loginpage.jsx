@@ -92,7 +92,10 @@ function Login() {
                 Are you an {isAgent ? "User" : "Agent"}?{" "}
                 <Link
                   className="switch-link"
-                  onClick={() => setIsAgent(!isAgent)}
+                  onClick={() => {
+                    setIsAgent(!isAgent);
+                    console.log("isAgent toggled:", !isAgent);
+                  }}
                 >
                   Switch to {isAgent ? "User" : "Agent"} Login
                 </Link>

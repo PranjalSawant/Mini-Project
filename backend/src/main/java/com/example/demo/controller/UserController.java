@@ -72,12 +72,13 @@ public class UserController {
     // Utility method
     private Date parseDateTime(String date, String time) {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm a");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             return sdf.parse(date + " " + time);
         } catch (ParseException e) {
-            throw new RuntimeException("Invalid date or time format");
+            throw new RuntimeException("Invalid date or time format", e);
         }
     }
+
 
     // Signup endpoint
     @PostMapping("/signup")

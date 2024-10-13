@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.AcceptOrderDTO;
+import com.example.demo.dto.AgentAuthResponseDTO;
 import com.example.demo.dto.AuthResponseDTO;
 import com.example.demo.dto.LoginRequestDTO;
 import com.example.demo.entities.AcceptedOrder;
@@ -43,8 +44,8 @@ public class AgentController {
 
     // Login
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginRequestDTO loginRequest) {
-        AuthResponseDTO response = agentService.login(loginRequest.getEmail(), loginRequest.getPassword());
+    public ResponseEntity<AgentAuthResponseDTO> login(@RequestBody LoginRequestDTO loginRequest) {
+        AgentAuthResponseDTO response = agentService.login(loginRequest.getEmail(), loginRequest.getPassword());
         if (response.getStatus().equals("success")) {
             return ResponseEntity.ok(response);
         } else {
