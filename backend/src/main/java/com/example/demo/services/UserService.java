@@ -1,9 +1,13 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.PendingOffer;
 import com.example.demo.entities.User;
+import com.example.demo.repositories.PendingOfferRepository;
 import com.example.demo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
 import com.example.demo.dto.AuthResponseDTO;
 
@@ -33,4 +37,15 @@ public class UserService {
         return new AuthResponseDTO("error", "Login failed", 0, null, null);
     }
 
+//    @Autowired
+//    private PendingOfferRepository pendingOfferRepository;
+//
+//    public List<PendingOffer> getPendingOffersByUserId(int userId) {
+//        // Fetch user by ID
+//        User user = userRepository.findById(userId)
+//                .orElseThrow(() -> new RuntimeException("User not found"));
+//
+//        // Fetch all pending offers associated with the user
+//        return pendingOfferRepository.findByUser(user);
+//    }
 }

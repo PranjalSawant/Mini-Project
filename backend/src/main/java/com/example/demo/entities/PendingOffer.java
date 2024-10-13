@@ -1,37 +1,36 @@
 package com.example.demo.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
 @Table(name = "pending_offers")
 public class PendingOffer {
     @Id
-    @Column(name = "offerId") //offerId for reference
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int offerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Unique identifier for the pending offer
+    private int pendingOfferId;
 
-    private int orderId;
-    private Boolean isActive; // Status of the offer
-    private Date receivedDate;
-    private int totalDayActive;
-
-    // Many-to-One  with User
+    // Many-to-One relationship with User
     @ManyToOne
-    @JoinColumn(name = "userId", referencedColumnName = "userId", insertable = false, updatable = false)
-    private User user; // User entity
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user; // Reference to the User entity
 
-    @Column(name = "userId") //userId for reference
-    private int userId;
-
-    // Many-to-One with Offers
+    // Many-to-One relationship with Offers
     @ManyToOne
-    @JoinColumn(name = "offerId", referencedColumnName = "offerId", insertable = false, updatable = false)
-    private Offers offer; //Offers entity
+    @JoinColumn(name = "offer_id", nullable = false)
+    private Offers offer; // Reference to the Offers entity
 
+    private int orderId; // Reference to the order associated with this offer
+    private char isActive; // Status of the offer (active/inactive)
+    private Date receivedDate; // Date when the offer was received
+    private int totalDayActive; // Total number of active days for the offer
 }

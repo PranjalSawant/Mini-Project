@@ -12,8 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "users")
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate IDs

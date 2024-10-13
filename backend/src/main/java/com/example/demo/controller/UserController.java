@@ -3,9 +3,12 @@ package com.example.demo.controller;
 import com.example.demo.dto.AuthResponseDTO;
 import com.example.demo.dto.LoginRequestDTO;
 import com.example.demo.dto.PickupRequestDTO;
+import com.example.demo.dto.UserIdRequestDTO;
 import com.example.demo.entities.PendingCollection;
+import com.example.demo.entities.PendingOffer;
 import com.example.demo.entities.User;
 import com.example.demo.services.PendingCollectionService;
+import com.example.demo.services.PendingOfferService;
 import com.example.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -114,4 +117,41 @@ public class UserController {
             return ResponseEntity.ok(pickups);
         }
     }
+
+    // user track order - data
+    @PostMapping("/pending-collections")
+    public ResponseEntity<List<PendingCollection>> getPendingCollectionsByUserId(@RequestBody UserIdRequestDTO userIdRequest) {
+        List<PendingCollection> pendingCollections = pendingCollectionService.getPendingCollectionsByUserId(userIdRequest.getUserId());
+
+        if (pendingCollections.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(pendingCollections);
+        }
+    }
+
+//    @Autowired
+//    private PendingOfferService pendingOfferService;
+
+    // Endpoint to fetch all offers for a particular user
+//    @GetMapping("/offers")
+//    public ResponseEntity<List<PendingOffer>> getUserOffers(@RequestParam int userId) {
+//        // Basic validation for userId
+//        if (userId <= 0) {
+//            return ResponseEntity.badRequest().build(); // Return 400 Bad Request for invalid userId
+//        }
+//
+//        List<PendingOffer> offers = pendingOfferService.findOffersByUserId(userId);
+//        if (offers.isEmpty()) {
+//            return ResponseEntity.noContent().build(); // Return 204 No Content if no offers found
+//        }
+//        return ResponseEntity.ok(offers); // Return the list of offers
+//    }
+
+
+    // Endpoint to get all pending offers for a specific user
+//    @GetMapping("/offers/{userId}")
+//    public List<PendingOffer> getPendingOffers(@PathVariable int userId) {
+//        return userService.getPendingOffersByUserId(userId);
+//    }
 }
