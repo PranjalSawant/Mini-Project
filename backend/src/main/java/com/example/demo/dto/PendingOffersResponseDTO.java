@@ -8,6 +8,4 @@ import java.util.List;
 @Setter
 public class PendingOffersResponseDTO {
     private List<PendingOfferDTO> pendingOffers;
-
-    // Getters and Setters
 }

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Titles } from "../components/Titles";
+import { getCookie } from "../utils/cookie";
 
 export const Offers = () => {
   const offers = [
@@ -33,9 +34,10 @@ export const Offers = () => {
   ];
 
   useEffect(() => {
+    const userId = getCookie("id");
     const fetchOffer = async () => {
       try {
-        const response = await fetch(`http://localhost:9090/api/offers/1`); // Replace with your actual endpoint
+        const response = await fetch(`http://localhost:9090/api/offers/${userId}`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }

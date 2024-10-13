@@ -11,7 +11,5 @@ public class UserDTO {
     private String lastname;
     private String email;
     private String phone;
-    private String isVerified;
-
-    // Getters and Setters
+    private char isVerified;
 }
