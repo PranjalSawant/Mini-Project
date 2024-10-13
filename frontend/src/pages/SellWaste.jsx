@@ -10,35 +10,88 @@ import axios from "axios";
 import {
   getObjectFromLocalStorage,
   storeObjectInLocalStorage,
-} from "../utils/cookie";
+  removeObjectFromLocalStorage,
+} from "../utils/cookie"; // Ensure correct path
 
 export const SellWaste = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const userData = getObjectFromLocalStorage("userdata");
-  // this data is to coming from localstorage
-  const [pickupData, setPickupData] = useState({
-    userId: 1,
-    userAddressId: 1, // Add this field
-    pickupAddress: {
-      address: "",
-      city: "",
-      state: "",
-      zip: "",
-      country: "",
-    },
-    pickupDate: "", // today date
-    pickupStartTime: "10:00", // Use HH:mm format
-    pickupEndTime: "11:00", // Use HH:mm format
-    items: [],
-    specialInstructions: "Please call me 30 minutes before arrival.",
-    contactNumber: "",
+  // Helper function to get today's date in YYYY-MM-DD format
+  const getTodayDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  // Initialize pickupData state with data from localStorage or default structure
+  const [pickupData, setPickupData] = useState(() => {
+    const savedData = getObjectFromLocalStorage("pickupData");
+    if (savedData) {
+      return savedData;
+    }
+    return {
+      userId: 1,
+      userAddressId: 1, // This should ideally be dynamic based on user addresses
+      pickupAddress: {
+        address: "",
+        city: "",
+        state: "",
+        zip: "",
+        country: "",
+      },
+      pickupDate: getTodayDate(), // Initialize with today's date
+      pickupStartTime: "10:00", // Use HH:mm format
+      pickupEndTime: "11:00", // Use HH:mm format
+      items: [],
+      specialInstructions: "Please call me 30 minutes before arrival.",
+      contactNumber: "",
+    };
   });
 
+  // Effect to fetch user data and populate pickupData on component mount
+  useEffect(() => {
+    const userData = getObjectFromLocalStorage("userdata");
+    if (userData && userData.user) {
+      setPickupData((prevData) => ({
+        ...prevData,
+        userId: userData.user.userId || prevData.userId,
+        contactNumber: userData.user.phone || prevData.contactNumber,
+        // Populate pickupAddress if addresses are available
+        pickupAddress:
+          userData.user.addresses && userData.user.addresses.length > 0
+            ? {
+                address:
+                  userData.user.addresses[0].street ||
+                  prevData.pickupAddress.address,
+                city:
+                  userData.user.addresses[0].city ||
+                  prevData.pickupAddress.city,
+                state:
+                  userData.user.addresses[0].state ||
+                  prevData.pickupAddress.state,
+                zip:
+                  userData.user.addresses[0].zipCode ||
+                  prevData.pickupAddress.zip,
+                country:
+                  userData.user.addresses[0].country ||
+                  prevData.pickupAddress.country,
+              }
+            : prevData.pickupAddress,
+        // Optionally, set userAddressId dynamically if addresses are present
+        userAddressId:
+          userData.user.addresses && userData.user.addresses.length > 0
+            ? userData.user.addresses[0].addressId // Ensure `addressId` exists
+            : prevData.userAddressId,
+      }));
+    }
+  }, []);
+
   // Effect to persist pickupData to localStorage whenever it changes
-  // useEffect(() => {
-  //   storeObjectInLocalStorage("userdata", pickupData);
-  // }, [pickupData]);
+  useEffect(() => {
+    storeObjectInLocalStorage("pickupData", pickupData);
+  }, [pickupData]);
 
   const handleItemClick = (itemType) => {
     setPickupData((prevData) => ({
@@ -54,10 +107,10 @@ export const SellWaste = () => {
     // Construct the payload to match PickupRequestDTO
     const payload = {
       userId: pickupData.userId,
-      userAddressId: 1, //  userAddressId
+      userAddressId: pickupData.userAddressId, // Dynamic if possible
       collectionType: "Pickup",
       collectionName: "Waste Pickup",
-      collectionDescription: pickupData.specialInstructions, // special instructions  description
+      collectionDescription: pickupData.specialInstructions, // special instructions as description
       pickupAddress: {
         address: pickupData.pickupAddress.address,
         city: pickupData.pickupAddress.city,
@@ -65,9 +118,11 @@ export const SellWaste = () => {
         zip: pickupData.pickupAddress.zip,
         country: pickupData.pickupAddress.country,
       },
-      pickupDate: pickupData.pickupDate,
+      pickupDate: pickupData.pickupDate, // YYYY-MM-DD format
       pickupStartTime: pickupData.pickupStartTime, // HH:mm format
       pickupEndTime: pickupData.pickupEndTime, // HH:mm format
+      items: pickupData.items, // Include items if needed in DTO
+      contactNumber: pickupData.contactNumber, // Ensure backend DTO includes this if necessary
     };
 
     try {
@@ -77,6 +132,7 @@ export const SellWaste = () => {
       );
       console.log("Pickup scheduled successfully", response.data);
       setShowModal(false); // Close modal on success
+      removeObjectFromLocalStorage("pickupData"); // Clear stored data if desired
     } catch (error) {
       console.error("Error scheduling pickup", error);
       // Optionally, add user-facing error handling here
@@ -120,7 +176,7 @@ export const SellWaste = () => {
                 <div className="d-flex">
                   <img
                     src={plastic}
-                    alt=""
+                    alt="Plastic Waste"
                     className="img-fluid rounded-3 m-auto"
                   />
                 </div>
@@ -139,7 +195,7 @@ export const SellWaste = () => {
                 <div className="d-flex">
                   <img
                     src={paper}
-                    alt=""
+                    alt="Paper Waste"
                     className="img-fluid rounded-3 m-auto"
                   />
                 </div>
@@ -155,10 +211,10 @@ export const SellWaste = () => {
               className="text-decoration-none"
             >
               <div className="rounded-3 border-olive">
-                <div className="d-felx">
+                <div className="d-flex">
                   <img
                     src={ewaste}
-                    alt=""
+                    alt="E-Waste"
                     className="img-fluid rounded-3 m-auto"
                   />
                 </div>
@@ -177,7 +233,7 @@ export const SellWaste = () => {
                 <div className="d-flex">
                   <img
                     src={clothes}
-                    alt=""
+                    alt="Clothes"
                     className="img-fluid rounded-3 m-auto"
                   />
                 </div>
@@ -343,7 +399,7 @@ export const SellWaste = () => {
                         Pickup Date
                       </label>
                       <input
-                        type="time"
+                        type="date" // Corrected input type
                         className="form-control"
                         id="pickupDate"
                         required

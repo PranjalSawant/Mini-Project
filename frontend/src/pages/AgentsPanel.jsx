@@ -59,7 +59,7 @@ export const AgentsPanel = () => {
         <option value="">Select Pincode</option>
         <option value="400604">400604</option>
         <option value="400001">400001</option>
-        <option value="560001">560001</option>
+        <option value="400112">400112</option>
       </select>
       {/* <div className="row mt-3">
         {cardsData.map(

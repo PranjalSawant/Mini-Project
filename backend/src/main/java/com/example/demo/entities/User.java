@@ -37,4 +37,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserAddress> addresses;
 
+    // One-to-many relationship with PendingOffer
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PendingOffer> pendingOffers; // Reference to PendingOffer
 }

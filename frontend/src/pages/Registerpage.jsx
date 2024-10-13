@@ -77,6 +77,8 @@ function Register() {
 
       const result = await response.json();
 
+
+      // alert / show success on succesful registration
       if (response.ok) {
         console.log(
           `${isAgent ? "Agent" : "User"} registration successful`,
@@ -228,7 +230,10 @@ function Register() {
                 Are you an {isAgent ? "User" : "Agent"}?{" "}
                 <Link
                   className="switch-link"
-                  onClick={() => setIsAgent(!isAgent)}
+                  onClick={() => {
+                    setIsAgent(!isAgent);
+                    console.log("isAgent toggled:", !isAgent);
+                  }}
                 >
                   Switch to {isAgent ? "User" : "Agent"} Register
                 </Link>
