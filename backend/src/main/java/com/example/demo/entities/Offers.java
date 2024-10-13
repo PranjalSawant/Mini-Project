@@ -2,48 +2,25 @@ package com.example.demo.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
+import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "offers")
 public class Offers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "offer_id") // Ensure this matches the database column
     private int offerId; // Unique identifier for the offer
+
     private String offerName; // Name of the offer
     private String offerDescription; // Description of the offer
     private double discount; // Discount percentage or amount
 
-    // Getters and Setters
-    public int getOfferId() {
-        return offerId;
-    }
-
-    public void setOfferId(int offerId) {
-        this.offerId = offerId;
-    }
-
-    public String getOfferName() {
-        return offerName;
-    }
-
-    public void setOfferName(String offerName) {
-        this.offerName = offerName;
-    }
-
-    public String getOfferDescription() {
-        return offerDescription;
-    }
-
-    public void setOfferDescription(String offerDescription) {
-        this.offerDescription = offerDescription;
-    }
-
-    public double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
+    // One-to-many relationship with PendingOffer
+    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PendingOffer> pendingOffers; // Reference to PendingOffer
 }

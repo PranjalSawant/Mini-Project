@@ -38,4 +38,8 @@ public class PendingCollectionService {
         pendingCollectionRepository.deleteById(collectionId);
     }
 
+    // Fetch all pending collections for a specific user
+    public List<PendingCollection> getPendingCollectionsByUserId(int userId) {
+        return pendingCollectionRepository.findByUserIdAndCollectionStatus(userId, "Pending");
+    }
 }

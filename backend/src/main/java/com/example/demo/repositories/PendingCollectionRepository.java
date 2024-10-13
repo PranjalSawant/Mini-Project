@@ -16,4 +16,7 @@ public interface PendingCollectionRepository extends JpaRepository<PendingCollec
 
     @Query("SELECT p FROM PendingCollection p JOIN FETCH p.user WHERE p.collectionZip = :pincode AND p.isAssigned = :isAssigned")
     List<PendingCollection> findByZipCodeAndIsAssigned(String pincode, char isAssigned);
+
+    // Fetch all pending collections for a specific user
+    List<PendingCollection> findByUserIdAndCollectionStatus(int userId, String collectionStatus);
 }
