@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-    @RequestMapping("/api/agents")
-    @CrossOrigin(origins = "*")
+@RequestMapping("/api/agents")
+@CrossOrigin(origins = "*")
 public class AgentController {
 
     @Autowired
@@ -31,6 +31,12 @@ public class AgentController {
     @Autowired
     private AcceptedOrderService acceptedOrderService;
 
+    //all agent details
+    @GetMapping
+    public ResponseEntity<List<Agent>> getAllAgents() {
+        List<Agent> agents = agentService.getAllAgents();
+        return ResponseEntity.ok(agents);
+    }
     // Signup
     @PostMapping("/signup")
     public ResponseEntity<AuthResponseDTO> signup(@RequestBody Agent agent) {

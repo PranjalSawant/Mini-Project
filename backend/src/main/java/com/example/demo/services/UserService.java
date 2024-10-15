@@ -36,16 +36,8 @@ public class UserService {
         }
         return new AuthResponseDTO("error", "Login failed", 0, null, null);
     }
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 
-//    @Autowired
-//    private PendingOfferRepository pendingOfferRepository;
-//
-//    public List<PendingOffer> getPendingOffersByUserId(int userId) {
-//        // Fetch user by ID
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(() -> new RuntimeException("User not found"));
-//
-//        // Fetch all pending offers associated with the user
-//        return pendingOfferRepository.findByUser(user);
-//    }
 }

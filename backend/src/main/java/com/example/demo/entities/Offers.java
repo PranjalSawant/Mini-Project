@@ -19,6 +19,7 @@ public class Offers {
     private String offerName; // Name of the offer
     private String offerDescription; // Description of the offer
     private double discount; // Discount percentage or amount
+    private char isActive;
 
     // One-to-many relationship with PendingOffer
     @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, orphanRemoval = true)

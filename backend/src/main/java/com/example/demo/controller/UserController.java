@@ -27,9 +27,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
-    public String getMessage() {
-        return "working.......";
+//    @GetMapping("/")
+//    public String getMessage() {
+//        return "working.......";
+//    }
+
+    @GetMapping()
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
     }
     @Autowired
     private PendingCollectionService pendingCollectionService;
@@ -129,29 +135,4 @@ public class UserController {
             return ResponseEntity.ok(pendingCollections);
         }
     }
-
-//    @Autowired
-//    private PendingOfferService pendingOfferService;
-
-    // Endpoint to fetch all offers for a particular user
-//    @GetMapping("/offers")
-//    public ResponseEntity<List<PendingOffer>> getUserOffers(@RequestParam int userId) {
-//        // Basic validation for userId
-//        if (userId <= 0) {
-//            return ResponseEntity.badRequest().build(); // Return 400 Bad Request for invalid userId
-//        }
-//
-//        List<PendingOffer> offers = pendingOfferService.findOffersByUserId(userId);
-//        if (offers.isEmpty()) {
-//            return ResponseEntity.noContent().build(); // Return 204 No Content if no offers found
-//        }
-//        return ResponseEntity.ok(offers); // Return the list of offers
-//    }
-
-
-    // Endpoint to get all pending offers for a specific user
-//    @GetMapping("/offers/{userId}")
-//    public List<PendingOffer> getPendingOffers(@PathVariable int userId) {
-//        return userService.getPendingOffersByUserId(userId);
-//    }
 }

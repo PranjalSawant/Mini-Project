@@ -12,4 +12,6 @@ public class OfferDTO {
     private String offerName;
     private String offerDescription;
     private double discount;
+    private char isActive;
 }
+
