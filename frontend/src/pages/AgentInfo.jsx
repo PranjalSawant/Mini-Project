@@ -2,34 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'; // You can use axios or fetch for API requests
 
 export const AgentInfo = () => {
-  const [agents, setAgents] = useState([]); // State to store fetched agent data
-
-  // Sample agent data to simulate the fetch
-  const sampleAgents = [
-    {
-      agentId: 1,
-      firstname: "Vinod",
-      lastname: "Agent",
-      email: "vinod@gmail.com",
-      is_verified: "Verified",
-      phone: "123121213",
-      city: "Vasai",
-      state: "Maharashtra",
-      country: "India",
-      zipcode: "401202",
-      street: "Vasai West"
-    }
-  ];
-
-  // Simulate fetching data from the backend
+  const [agents, setAgents] = useState([]);
   useEffect(() => {
     const fetchAgents = async () => {
       try {
-        // Uncomment the following line to fetch real data
-        // const response = await axios.get('http://localhost:9090/api/agents'); // Replace with your API endpoint
-        
-        // For testing, we use the sample data
-        const response = { data: sampleAgents }; // Simulated response
+        const response = await axios.get('http://localhost:9090/api/agents'); 
         setAgents(response.data);
       } catch (err) {
         console.error('Error fetching agent data:', err);
@@ -40,7 +17,7 @@ export const AgentInfo = () => {
   }, []);
 
   return (
-    <div className='container'>
+    <div className='container-fluid'>
       <h2 className='mt-4 mb-4'>Agent Information</h2>
       <table className='table table-striped'>
         <thead className='thead-dark bg-olive text-white'>
@@ -62,16 +39,16 @@ export const AgentInfo = () => {
           {agents.map((agent, index) => (
             <tr key={agent.agentId}>
               <td>{index + 1}</td>
-              <td>{agent.firstname}</td>
-              <td>{agent.lastname}</td>
-              <td>{agent.email}</td>
+              <td>{agent.agentFirstName}</td>
+              <td>{agent.agentLastName}</td>
+              <td>{agent.agentEmail}</td>
               <td>{agent.phone}</td>
-              <td>{agent.is_verified}</td>
-              <td>{agent.street}</td>
-              <td>{agent.city}</td>
-              <td>{agent.state}</td>
-              <td>{agent.country}</td>
-              <td>{agent.zipcode}</td>
+              <td>{agent.agentType}</td>
+              <td>{agent.agentAddress}</td>
+              <td>{agent.agentCity}</td>
+              <td>{agent.agentState}</td>
+              <td>{agent.agentCountry}</td>
+              <td>{agent.agentZip}</td>
             </tr>
           ))}
         </tbody>

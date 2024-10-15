@@ -12,6 +12,7 @@ import {
   storeObjectInLocalStorage,
   removeObjectFromLocalStorage,
 } from "../utils/cookie"; // Ensure correct path
+import { Rates } from "../components/Rates";
 
 export const SellWaste = () => {
   const [showModal, setShowModal] = useState(false);
@@ -148,8 +149,7 @@ export const SellWaste = () => {
 
   return (
     <div className="">
-      <div className="py-5 bg-olive">
-      <div className="py-5"></div>
+      <div className="py-5 text-olive">
         <div className="container">
             {/*  alert */}
             {alertMessage && (
@@ -160,9 +160,9 @@ export const SellWaste = () => {
                   )}
           <Titles
             heading="Your Recycling Impact in Action"
-            textColor="text-white"
+            textColor="text-olive"
           />
-          <p className="text-center text-white fw-semibold">
+          <p className="text-center text-olive fw-semibold">
             Every small step counts! You’re making a tangible difference by
             turning waste into resources. Track your progress and see how much
             you've contributed to a cleaner planet. Let’s keep the momentum
@@ -176,6 +176,7 @@ export const SellWaste = () => {
           </div>
         </div>
       </div>
+      <Rates/>
       <div className="container">
         <Titles
           heading="Pick a Category for Your Recyclable Items"

@@ -43,7 +43,21 @@ function Login() {
       return;
     }
 
-    try {
+    const adminEmail = "admin@gmail.com";
+    const adminPassword = "admin";
+
+    if (email === adminEmail && password === adminPassword) {
+      setAlertMessage("Admin login successful!");
+      setAlertType("success");
+      setCookie("id", "admin", 1);
+      setCookie("username", "admin", 1);
+      setCookie("isAdmin", "true", 1);
+      storeObjectInLocalStorage("userdata", { id: "admin", username: "admin", userType: "Admin" });
+      setTimeout(() => {
+        navigate("/admin");
+      }, 1000);
+    } else {
+try {
       const apiEndpoint = isAgent
         ? "http://localhost:9090/api/agents/login"
         : "http://localhost:9090/api/user/login";
@@ -75,6 +89,7 @@ function Login() {
       );
       setAlertType("danger");
     }
+  }
   };
 
   return (

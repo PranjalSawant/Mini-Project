@@ -16,20 +16,20 @@ const Footer = () => {
           <div className="col-md-3 mb-3">
             <h5>Company</h5>
             <ul className="list-unstyled">
-              <li><a href="/about" className="text-white text-decoration-none">About Us</a></li>
-              <li><a href="/how-it-works" className="text-white text-decoration-none">How It Works</a></li>
-              <li><a href="/careers" className="text-white text-decoration-none">Careers</a></li>
-              <li><a href="/blog" className="text-white text-decoration-none">Blog</a></li>
+              <li><Link to="/about" className="text-white text-decoration-none">About Us</Link></li>
+              <li><Link to="/how-it-works" className="text-white text-decoration-none">How It Works</Link></li>
+              <li><Link to="/careers" className="text-white text-decoration-none">Careers</Link></li>
+              <li><Link to="/blog" className="text-white text-decoration-none">Blog</Link></li>
             </ul>
           </div>
 
           <div className="col-md-3 mb-3">
             <h5>Services</h5>
             <ul className="list-unstyled">
-              <li><a href="/sell-waste" className="text-white text-decoration-none">Sell Waste</a></li>
-              <li><a href="/partners" className="text-white text-decoration-none">Partner with Us</a></li>
-              <li><a href="/pricing" className="text-white text-decoration-none">Pricing</a></li>
-              <li><a href="/faqs" className="text-white text-decoration-none">FAQs</a></li>
+              <li><Link to="/sell-waste" className="text-white text-decoration-none">Sell Waste</Link></li>
+              <li><Link to="/partners" className="text-white text-decoration-none">Partner with Us</Link></li>
+              <li><Link to="/pricing" className="text-white text-decoration-none">Pricing</Link></li>
+              <li><Link to="/faqs" className="text-white text-decoration-none">FAQs</Link></li>
             </ul>
           </div>
           <div className="col-md-3 mb-3">

@@ -5,7 +5,6 @@ export const Contactpage = () => {
   return (
     <>
       <div className="py-5"></div>
-      <div className="py-5"></div>
     <div className='container'>
       <div className="row">
           <div className="col-lg-6">

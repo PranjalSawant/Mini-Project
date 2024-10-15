@@ -1,33 +1,14 @@
 import React, { useEffect, useState } from 'react';
-// import axios from 'axios'; 
+import axios from 'axios';
+
 export const UserInfo = () => {
-  const [users, setUsers] = useState([]); 
+  const [users, setUsers] = useState([]);
 
-  const sampleUsers = [
-    {
-      userId: 1,
-      firstname: "John",
-      lastname: "Doe",
-      email: "john@gmail.com",
-      is_verified: "N",
-      phone: "1231213123",
-      street: "Stella",
-      city: "Mumbai",
-      state: "Maharashtra",
-      country: "India",
-      zipcode: "123"
-    }
-  ];
-
- 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-       
-        // const response = await axios.get('http://localhost:9090/api/users'); 
-       
-        const response = { data: sampleUsers }; 
-        setUsers(response.data);
+        const response = await axios.get('http://localhost:9090/api/user');
+        setUsers(response.data); 
       } catch (err) {
         console.error('Error fetching user data:', err);
       }
@@ -37,7 +18,7 @@ export const UserInfo = () => {
   }, []);
 
   return (
-    <div className='container'>
+    <div className='container-fluid'>
       <h2 className='mt-4 mb-4'>User Information</h2>
       <table className='table table-striped'>
         <thead className='thead-dark bg-olive text-white'>
@@ -68,7 +49,7 @@ export const UserInfo = () => {
               <td>{user.city}</td>
               <td>{user.state}</td>
               <td>{user.country}</td>
-              <td>{user.zipcode}</td>
+              <td>{user.zipCode}</td>
             </tr>
           ))}
         </tbody>

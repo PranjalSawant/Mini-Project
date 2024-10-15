@@ -9,7 +9,7 @@ const Topbar = () => {
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className="text-olive" to="/">Logout</Link>
+              <Link className="text-olive" to="/"><button className='btn btn-success'>Logout</button></Link>
             </li>
           </ul>
         </div>
