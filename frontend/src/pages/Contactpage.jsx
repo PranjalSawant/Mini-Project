@@ -3,8 +3,10 @@ import contact from '../assets/contact.png'
 import { Titles } from '../components/Titles'
 export const Contactpage = () => {
   return (
-    <div className='container'>
+    <>
       <div className="py-5"></div>
+      <div className="py-5"></div>
+    <div className='container'>
       <div className="row">
           <div className="col-lg-6">
           <img src={contact} alt="" className='img-fluid rounded-5 w-100' />
@@ -27,5 +29,6 @@ export const Contactpage = () => {
       </div>
       <div className="py-5"></div>
     </div>
+    </>
   )
 }

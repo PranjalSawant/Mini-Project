@@ -27,9 +27,9 @@ export const Header = () => {
     // navigate("/login");
   };
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg bg-olive ">
-        <div className="container d-flex justify-content-between align-items-center">
+    <>
+      <nav className="navbar navbar-expand-lg bg-olive fixed-top">
+        <div className="container-fluid px-4 d-flex justify-content-between align-items-center">
           <Link
             className="navbar-brand text-white dancing-script-brand fs-2"
             to="/"
@@ -60,6 +60,11 @@ export const Header = () => {
               <li className="nav-item">
                 <Link className="nav-link px-3" to="/sellwaste">
                   Sell Waste
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link px-3" to="/buywaste">
+                  Buy Waste
                 </Link>
               </li>
             </ul>
@@ -118,6 +123,6 @@ export const Header = () => {
           </ul>
         </div>
       </nav>
-    </div>
+    </>
   );
 };

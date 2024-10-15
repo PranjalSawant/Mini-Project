@@ -7,7 +7,7 @@ export const Layout = ({ children }) => {
   return (
     <div className='overflow-hidden'>
       <Header />
-      <main>{children}</main>
+      <main >{children}</main>
       <Footer/>
     </div>
   );

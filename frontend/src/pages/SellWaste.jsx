@@ -149,6 +149,7 @@ export const SellWaste = () => {
   return (
     <div className="">
       <div className="py-5 bg-olive">
+      <div className="py-5"></div>
         <div className="container">
             {/*  alert */}
             {alertMessage && (

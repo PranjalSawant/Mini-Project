@@ -12,6 +12,7 @@ import { AgentsPanel } from "./pages/AgentsPanel";
 import { AgentsTrack } from "./pages/AgentsTrack";
 import { UserTrackOrder } from "./pages/UserTrackOrder";
 import { Offers } from "./pages/Offers";
+import { Buywaste } from "./pages/Buywaste";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
       <Route path="/agent/track" element={ <Layout><AgentsTrack /></Layout>} />
       <Route path="/trackorder" element={ <Layout><UserTrackOrder /></Layout>} />
       <Route path="/offers" element={ <Layout><Offers/></Layout>} />
+      <Route path="/buywaste" element={<Layout><Buywaste/></Layout>}/>
 
 
         {/* Routes without Header */}

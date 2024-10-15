@@ -9,8 +9,10 @@ import { HowItWorks } from '../components/HowItWorks'
 
 export const Homepage = () => {
   return ( <>
-    <div className='container'>
         <div className="py-5"></div>
+        <div className="py-4"></div>
+
+    <div className='container'>
         
         <div>
             <img src={banner} alt="" className='rounded-5 img-fluid w-100' />
