@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Titles } from "../components/Titles";
 import { getCookie } from "../utils/cookie";
+import { pendingCollections, url } from "../config";
 
 export const UserTrackOrder = () => {
   const [orders, setOrders] = useState([]); // fetched orders
@@ -14,7 +15,7 @@ export const UserTrackOrder = () => {
     const fetchPendingCollections = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:9090/api/user/pending-collections",
+          `${url + pendingCollections}`,
           {
             userId: getCookie("id"),
           }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { agentRegsiter, url, userRegister } from "../config";
 
 function Register() {
   const [isAgent, setIsAgent] = useState(false); // Toggle between User and Agent registration
@@ -64,8 +65,8 @@ function Register() {
         };
 
     const apiEndpoint = isAgent
-      ? "http://localhost:9090/api/agents/signup" // Agent signup endpoint
-      : "http://localhost:9090/api/user/signup"; // User signup endpoint
+      ? `${url + agentRegsiter}` // Agent signup endpoint
+      : `${url + userRegister}`; // User signup endpoint
 
     try {
       const response = await fetch(apiEndpoint, {
@@ -86,7 +87,7 @@ function Register() {
           result
         );
         setAlertMessage(`${isAgent ? "Agent" : "User"} registration successful!`);
-        setAlertType("info");
+        setAlertType("success");
       } else {
         console.error(
           `${isAgent ? "Agent" : "User"} registration failed`,

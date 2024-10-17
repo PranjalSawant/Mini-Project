@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'; // You can use axios or fetch for API requests
-
+import axios from 'axios'; 
+import {url , agentInfo}  from "../config";
 export const AgentInfo = () => {
   const [agents, setAgents] = useState([]);
   useEffect(() => {
     const fetchAgents = async () => {
       try {
-        const response = await axios.get('http://localhost:9090/api/agents'); 
+        const response = await axios.get(`${url + agentInfo}`);
         setAgents(response.data);
       } catch (err) {
         console.error('Error fetching agent data:', err);

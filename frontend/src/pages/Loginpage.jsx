@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { setCookie, storeObjectInLocalStorage } from "../utils/cookie";
 import axios from "axios";
+import { agentLogin, url, userLogin } from "../config";
 
 function Login() {
   const [isAgent, setIsAgent] = useState(false);
@@ -59,8 +60,8 @@ function Login() {
     } else {
 try {
       const apiEndpoint = isAgent
-        ? "http://localhost:9090/api/agents/login"
-        : "http://localhost:9090/api/user/login";
+        ? `${url + agentLogin}`
+        : `${url + userLogin}`;
       const { data } = await axios.post(apiEndpoint, {
         email,
         password,

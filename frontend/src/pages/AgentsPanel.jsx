@@ -3,6 +3,7 @@ import { Titles } from "../components/Titles";
 import { Button } from "../components/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { agentPanel, url } from "../config";
 
 export const AgentsPanel = () => {
   const [selectedPincode, setSelectedPincode] = useState("");
@@ -30,7 +31,8 @@ export const AgentsPanel = () => {
 
     try {
       const { data } = await axios.get(
-        `http://localhost:9090/api/user/pickups/${selectedPincode}`
+        // `http://localhost:9090/api/user/pickups/${selectedPincode}`
+        `${url + agentPanel + selectedPincode}`
       );
 
       console.log("Data received", data);

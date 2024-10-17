@@ -13,6 +13,7 @@ import {
   removeObjectFromLocalStorage,
 } from "../utils/cookie"; // Ensure correct path
 import { Rates } from "../components/Rates";
+import { sellWaste, url } from "../config";
 
 export const SellWaste = () => {
   const [showModal, setShowModal] = useState(false);
@@ -129,7 +130,7 @@ export const SellWaste = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:9090/api/user/pickup",
+        `${url + sellWaste}`,
         payload
       );
       console.log("Pickup scheduled successfully", response.data);

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { addOffers, url } from "../config";
 
 export const OffersInfo = () => {
   const [offer, setOffer] = useState({
-    offerId: 0, // Automatically set to 0
+    offerId: 0,
     offerName: "",
     offerDescription: "",
     discount: 0,
@@ -24,7 +25,7 @@ export const OffersInfo = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:9090/api/offers", offer);
+      const response = await axios.post(`${url + addOffers}`, offer);
       
       // Show success message
       setAlertMessage("Offer submitted successfully!");

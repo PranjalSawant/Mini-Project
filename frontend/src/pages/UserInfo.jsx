@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { url, userInfo } from '../config';
 
 export const UserInfo = () => {
   const [users, setUsers] = useState([]);
@@ -7,7 +8,7 @@ export const UserInfo = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:9090/api/user');
+        const response = await axios.get(`${url + userInfo}`);
         setUsers(response.data); 
       } catch (err) {
         console.error('Error fetching user data:', err);
