@@ -5,6 +5,7 @@ export const url = "http://localhost:9090/api/";
 export const addOffers = "offers";
 export const userInfo = "user";
 export const agentInfo = "agents";
+export const collectionInfo = "orders/completed";
 
 // AGENT PAGE
 export const agentPanel = "user/pickups/";  // show list of all collection for pickup 

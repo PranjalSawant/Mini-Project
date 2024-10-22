@@ -35,4 +35,10 @@ public class PendingCollection {
     private String collectionCity;
     private String collectionZip;
     private String collectionCountry;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modifiedDate;
 }
