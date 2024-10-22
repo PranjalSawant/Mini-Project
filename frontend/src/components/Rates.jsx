@@ -57,7 +57,7 @@ export const Rates = () => {
         ]
     };
     return (
-        <div className='bg-olive p-5'>
+        <div className='bg-olive p-md-5'>
             <div className="container">
                 <Titles heading="Cash for Your Trash: See How Much You Can Earn!" textColor="text-white" />
                 <div className="container">

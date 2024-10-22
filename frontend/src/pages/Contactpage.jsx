@@ -11,7 +11,7 @@ export const Contactpage = () => {
           <img src={contact} alt="" className='img-fluid rounded-5 w-100' />
           </div>
           <div className="col-lg-6">
-            <div className='p-5 d-flex'>
+            <div className='p-md-5 d-flex'>
               <div className="m-auto">
               <Titles textColor="text-olive" heading="We’d Love to Hear From You"/>
             <p className='fw-semibold text-olive text-center'>Whether you have a question, want to know more about our platform, or need assistance, we’re here to help. Let’s work together to make a positive impact!</p>
