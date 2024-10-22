@@ -27,11 +27,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    @GetMapping("/")
-//    public String getMessage() {
-//        return "working.......";
-//    }
-
     @GetMapping()
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();

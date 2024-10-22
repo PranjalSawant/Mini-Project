@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Titles } from "../components/Titles";
 import { Button } from "../components/Button";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import axios from "axios";
-import { agentPanel, url } from "../config";
+import { agentPanel, pickup_confirm, url } from "../config";
+import { getCookie } from "../utils/cookie";
 
 export const AgentsPanel = () => {
   const [selectedPincode, setSelectedPincode] = useState("");
@@ -20,6 +21,33 @@ export const AgentsPanel = () => {
       setError("Pincode must be a 6-digit number");
     }
   };
+
+  const handleConfirmation = async (e) => {
+
+    // details of that particular card i.e collection
+    const collectionId = e.target.dataset.collectionId;
+    const userId = e.target.dataset.userId;
+
+    console.log("Collection ID:", collectionId);
+    console.log("User ID:", userId);
+    try {
+      const { data } = await axios.post(
+        `${url + pickup_confirm }`, {
+          collectionId : collectionId,
+          agentId : getCookie("id"),
+          userId : userId
+        }
+      );
+
+      console.log("Data received", data);
+    } catch (error) {
+      console.error(
+        "Data fetch failed",
+        error.response?.data?.message || error.message
+      );
+    }
+  };
+
 
   const handlePincodeSubmit = async (e) => {
     e.preventDefault();
@@ -64,31 +92,39 @@ export const AgentsPanel = () => {
         {cardsData.length === 0 && !error && (
           <p className="text-center">No pickups found for this pincode.</p>
         )}
-        {cardsData.map((card) => (
-          (card.collectionZip === selectedPincode) && (
-            <div className="col-md-4" key={card.collectionId}>
-              <div className="card mb-3 border-0 rounded-5">
-                <div className="card-body bg-grey rounded-5 p-4">
-                  <h5 className="card-title fw-bold py-3">
-                    {card.collectionName} - {card.userId}{" "}
-                    {card.user.firstname}
-                  </h5>
-                  <p className="card-text">{card.collectionDescription}</p>
-                  <p className="card-text">
-                    <strong>City:</strong> {card.collectionCity},{" "}
-                    {card.collectionState}
-                  </p>
-                  <p className="card-text">
-                    <strong>Status:</strong> {card.collectionStatus}
-                  </p>
-                  <Link>
-                    <Button btnText="Confirm Pickup" bgColor="btn-success" />
-                  </Link>
+        {cardsData.map(
+          (card) =>
+            card.collectionZip === selectedPincode && (
+              <div className="col-md-4" key={card.collectionId}>
+                <div className="card mb-3 border-0 rounded-5">
+                  <div className="card-body bg-grey rounded-5 p-4">
+                    <h5 className="card-title fw-bold py-3">
+                      {card.collectionName} - {card.userId}{" "}
+                      {card.user.firstname}
+                    </h5>
+                    <p className="card-text">{card.collectionDescription}</p>
+                    <p className="card-text">
+                      <strong>City:</strong> {card.collectionCity},{" "}
+                      {card.collectionState}
+                    </p>
+                    <p className="card-text">
+                      <strong>Status:</strong> {card.collectionStatus}
+                    </p>
+                    {/* <Link> */}
+                    <button
+                      className="btn btn-success rounded-5 py-2"
+                      data-collection-id={card.collectionId}
+                      data-user-id={card.userId}
+                      onClick={handleConfirmation}
+                    >
+                      Confirm Pickup
+                    </button>
+                    {/* </Link> */}
+                  </div>
                 </div>
               </div>
-            </div>
-          )
-        ))}
+            )
+        )}
       </div>
       <div className="py-5"></div>
     </div>

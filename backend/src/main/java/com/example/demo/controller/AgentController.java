@@ -82,13 +82,14 @@ public class AgentController {
 
             // Update the pending collection
             collection.setIsAssigned('Y');
+            collection.setCollectionStatus("Processing");
             pendingCollectionService.savePendingCollection(collection);
 
             // Add to AcceptedOrder table
             AcceptedOrder acceptedOrder = new AcceptedOrder();
             acceptedOrder.setUserId(collection.getUserId());
             acceptedOrder.setAgentId(acceptOrderDTO.getAgentId());
-            acceptedOrder.setOrderStatus("Accepted");
+            acceptedOrder.setOrderStatus("Processing");
             acceptedOrder.setPendingCollection(collection);
 
             acceptedOrderService.saveAcceptedOrder(acceptedOrder);

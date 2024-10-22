@@ -16,7 +16,7 @@ export const Offers = () => {
           throw new Error("Network response was not ok");
         }
         const offerData = await response.json();
-        
+
         // Access the pendingOffers array from the response
         if (offerData.pendingOffers && Array.isArray(offerData.pendingOffers)) {
           setOffers(offerData.pendingOffers);
