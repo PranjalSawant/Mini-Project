@@ -13,10 +13,12 @@ import { AgentsTrack } from "./pages/AgentsTrack";
 import { UserTrackOrder } from "./pages/UserTrackOrder";
 import { Offers } from "./pages/Offers";
 import { Buywaste } from "./pages/Buywaste";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         {/* Routes with Header */}
         <Route path="/" element={<Layout><Homepage /></Layout>}/>

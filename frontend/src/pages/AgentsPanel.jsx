@@ -10,6 +10,8 @@ export const AgentsPanel = () => {
   const [selectedPincode, setSelectedPincode] = useState("");
   const [cardsData, setCardsData] = useState([]);
   const [error, setError] = useState(""); // Error state for invalid pincode
+  const [alertMessage, setAlertMessage] = useState(null); 
+  const [alertType, setAlertType] = useState(""); 
 
   const handlePincodeChange = (e) => {
     const pincode = e.target.value;
@@ -38,13 +40,18 @@ export const AgentsPanel = () => {
           userId : userId
         }
       );
-
+      setAlertMessage("Pickup successful!");
+      setAlertType("success");
       console.log("Data received", data);
     } catch (error) {
       console.error(
         "Data fetch failed",
         error.response?.data?.message || error.message
       );
+      setAlertMessage(
+        `Data fetch failed ${error.response?.data?.message || error.message}`
+      );
+      setAlertType("danger");
     }
   };
 
@@ -72,10 +79,14 @@ export const AgentsPanel = () => {
       );
     }
   };
-
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString();  // You can customize the format using toLocaleDateString() or toLocaleTimeString()
+  };
   return (
     <div className="container">
       <Titles heading="Enter Pincode to Display Cards" textColor="text-olive" />
+      
       <form onSubmit={handlePincodeSubmit}>
         <input
           type="text"
@@ -87,7 +98,12 @@ export const AgentsPanel = () => {
         {error && <p className="text-danger">{error}</p>} {/* Error message */}
         <Button btnText="Search" bgColor="btn-success mt-3" />
       </form>
-
+      {alertMessage && (
+              <div className={`alert alert-${alertType} alert-dismissible fade show`} role="alert">
+                {alertMessage}
+                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            )}
       <div className="row mt-3">
         {cardsData.length === 0 && !error && (
           <p className="text-center">No pickups found for this pincode.</p>
@@ -96,16 +112,17 @@ export const AgentsPanel = () => {
           (card) =>
             card.collectionZip === selectedPincode && (
               <div className="col-md-4" key={card.collectionId}>
-                <div className="card mb-3 border-0 rounded-5">
+                <div className="card h-100 mb-3 border-0 rounded-5">
                   <div className="card-body bg-grey rounded-5 p-4">
                     <h5 className="card-title fw-bold py-3">
-                      {card.collectionName} - {card.userId}{" "}
-                      {card.user.firstname}
+                      {card.user.firstname} {" "} {card.user.lastname}
                     </h5>
-                    <p className="card-text">{card.collectionDescription}</p>
+                    <p className="card-text"><strong>Message:</strong> {card.collectionDescription}</p>
                     <p className="card-text">
-                      <strong>City:</strong> {card.collectionCity},{" "}
-                      {card.collectionState}
+                      <strong>Address:</strong> {card.user.street} {" "} { card.user.city} {" "} {card.user.state}
+                    </p>
+                    <p className="card-text">
+                      <strong>Date & Time:</strong> {formatDate(card.collectionStartTime)}
                     </p>
                     <p className="card-text">
                       <strong>Status:</strong> {card.collectionStatus}
