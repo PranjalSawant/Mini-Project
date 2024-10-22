@@ -9,8 +9,8 @@ export const CollectionInfo = () => {
     const fetchCollections = async () => {
       try {
         const response = await axios.get(`${url + collectionInfo}`);
+        console.log("API Response:", response.data); // Log the response data
         setCollections(response.data);
-        console.log(response.data);
       } catch (err) {
         console.error("Error fetching collection data:", err);
       }
@@ -26,24 +26,38 @@ export const CollectionInfo = () => {
         <thead className="thead-dark bg-olive text-white">
           <tr>
             <th>#</th>
-            <th>Collection Name</th>
-            <th>Description</th>
-            <th>Date</th>
+            <th>Collection Items</th>
+            <th>Pickup Date</th>
+            <th>Agent Name</th>
+            <th>Contact Number</th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          {collections.map((collection, index) => (
-            <tr key={collection.orderId}>
-              <td>{index + 1}</td>
-              <td>{collection.collectionName}</td>
-              <td>{collection.collectionDescription}</td>
-              <td>
-                {new Date(collection.collectionDate).toLocaleDateString()}
-              </td>
-              <td>{collection.collectionStatus}</td>
+          {collections.length === 0 ? (
+            <tr>
+              <td colSpan="7" className="text-center">No collections available</td>
             </tr>
-          ))}
+          ) : (
+            collections.map((collection, index) => (
+              <tr key={collection.orderId}>
+                <td>{index + 1}</td>
+                <td>
+                  {collection.items && Array.isArray(collection.items) 
+                    ? collection.items.map(item => (
+                        <div key={item.itemType}>
+                          {item.itemType} (Quantity: {item.quantity})
+                        </div>
+                      )) 
+                    : "No items available"}
+                </td>
+                <td>{new Date(collection.modifiedDate).toLocaleDateString()}</td>
+                <td>{collection.agent.agentFirstName} {" "} {collection.agent.agentLastName}</td>
+                <td>{collection.agent.phone}</td>
+                <td>{collection.orderStatus}</td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>

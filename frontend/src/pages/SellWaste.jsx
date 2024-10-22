@@ -100,6 +100,8 @@ export const SellWaste = () => {
     setPickupData((prevData) => ({
       ...prevData,
       items: [...prevData.items, { itemType, quantity: 1 }], // default quantity of 1
+      collectionType: "Pickup", // Set collectionType dynamically if needed
+      collectionName: itemType // Use the itemType as the collection name
     }));
     setShowModal(true);
   };
@@ -111,8 +113,8 @@ export const SellWaste = () => {
     const payload = {
       userId: pickupData.userId,
       userAddressId: pickupData.userAddressId, // Dynamic if possible
-      collectionType: "Pickup",
-      collectionName: "Waste Pickup",
+      collectionType:  pickupData.collectionType,
+      collectionName: pickupData.collectionName,
       collectionDescription: pickupData.specialInstructions, // special instructions as description
       pickupAddress: {
         address: pickupData.pickupAddress.address,
