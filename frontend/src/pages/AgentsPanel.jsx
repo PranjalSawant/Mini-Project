@@ -5,6 +5,7 @@ import { Button } from "../components/Button";
 import axios from "axios";
 import { agentPanel, pickup_confirm, url } from "../config";
 import { getCookie } from "../utils/cookie";
+import { Link } from "react-router-dom";
 
 export const AgentsPanel = () => {
   const [selectedPincode, setSelectedPincode] = useState("");
@@ -97,6 +98,8 @@ export const AgentsPanel = () => {
         />
         {error && <p className="text-danger">{error}</p>} {/* Error message */}
         <Button btnText="Search" bgColor="btn-success mt-3" />
+        
+
       </form>
       {alertMessage && (
               <div className={`alert alert-${alertType} alert-dismissible fade show`} role="alert">
@@ -142,6 +145,11 @@ export const AgentsPanel = () => {
               </div>
             )
         )}
+        <div className="d-flex py-3">
+          <div className="m-auto">
+            <Link to='/agent/track'><Button btnText="Track your pickups" bgColor="btn-success mt-3" /></Link>
+          </div>
+        </div>
       </div>
       <div className="py-5"></div>
     </div>
